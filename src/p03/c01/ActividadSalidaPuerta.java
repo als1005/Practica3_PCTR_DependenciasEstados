@@ -15,7 +15,7 @@ public class ActividadSalidaPuerta implements Runnable{
 	@Override
 	public void run() {
 		for (int i = 0; i < NUMENTRADAS; i ++) {
-				parque.salirDelParque(puerta);
+			parque.salirDelParque(puerta);
 		}
 	}
 }
