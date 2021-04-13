@@ -14,7 +14,8 @@ public class ActividadSalidaPuerta implements Runnable{
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		
+		for (int i = 0; i < NUMENTRADAS; i ++) {
+				parque.salirDelParque(puerta);
+		}
 	}
 }
