@@ -2,32 +2,28 @@ package src.p03.c01;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.Iterator;
 
 public class Parque implements IParque{
 
 
-	// TODO 
+	private static final int AFORO_MAX = 50;
 	private int contadorPersonasTotales;
 	private Hashtable<String, Integer> contadoresPersonasPuerta;
 	
 	
-	public Parque() {	// TODO
-		contadorPersonasTotales = 0;
+	public Parque() {
 		contadoresPersonasPuerta = new Hashtable<String, Integer>();
-		// TODO
 	}
 
 
 	@Override
-	public void entrarAlParque(String puerta){		// TODO
+	public void entrarAlParque(String puerta){
 		
 		// Si no hay entradas por esa puerta, inicializamos
 		if (contadoresPersonasPuerta.get(puerta) == null){
 			contadoresPersonasPuerta.put(puerta, 0);
-		}
-		
-		// TODO
-				
+		}		
 		
 		// Aumentamos el contador total y el individual
 		contadorPersonasTotales++;		
@@ -36,10 +32,7 @@ public class Parque implements IParque{
 		// Imprimimos el estado del parque
 		imprimirInfo(puerta, "Entrada");
 		
-		// TODO
-		
-		
-		// TODO
+		checkInvariante();
 		
 	}
 	
