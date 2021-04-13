@@ -7,7 +7,7 @@ import java.util.Iterator;
 public class Parque implements IParque{
 
 
-	private static final int AFORO_MAX = 50;
+	private static final int AFÓRO_MAX = 50;
 	private int contadorPersonasTotales;
 	private Hashtable<String, Integer> contadoresPersonasPuerta;
 	
