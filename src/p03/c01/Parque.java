@@ -37,7 +37,19 @@ public class Parque implements IParque{
 	}
 	
 	public void salirDelParque(String puerta) {
+		// Si no hay entradas por esa puerta, inicializamos
+		if (contadoresPersonasPuerta.get(puerta) == null){
+			contadoresPersonasPuerta.put(puerta, 0);
+		}		
 		
+		// Aumentamos el contador total y el individual
+		contadorPersonasTotales--;		
+		contadoresPersonasPuerta.put(puerta, contadoresPersonasPuerta.get(puerta)-1);
+		
+		// Imprimimos el estado del parque
+		imprimirInfo(puerta, "Salida");
+		
+		checkInvariante();		
 	}
 	
 	
