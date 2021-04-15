@@ -2,9 +2,6 @@ package src.p03.c01;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
-import java.util.Iterator;
-
-import com.sun.swing.internal.plaf.synth.resources.synth;
 
 public class Parque implements IParque{
 
@@ -79,11 +76,11 @@ public class Parque implements IParque{
 	
 	protected void checkInvariante() {
 		assert sumarContadoresPuerta() == contadorPersonasTotales : "INV: La suma de contadores de las puertas debe ser igual al valor del contador del parte";
-		assert sumarContadoresPuerta() >= 0 : "El parque está vacía";
+		assert sumarContadoresPuerta() >= 0 : "El parque está vacío";
 		assert sumarContadoresPuerta() <= AFÓRO_MAX: "El parque está lleno";
 	}
 
-	protected void comprobarAntesDeEntrar(){	// TODO
+	protected void comprobarAntesDeEntrar() {
 		while (contadorPersonasTotales >= AFÓRO_MAX) {
 			try {
 				this.wait();
@@ -94,7 +91,7 @@ public class Parque implements IParque{
 		}
 	}
 
-	protected void comprobarAntesDeSalir(){		// TODO
+	protected void comprobarAntesDeSalir(){	
 		while ( contadorPersonasTotales<=0) {
 			try {
 				this.wait();
@@ -104,6 +101,4 @@ public class Parque implements IParque{
 			}
 		}
 	}
-
-
 }
