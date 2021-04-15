@@ -22,6 +22,8 @@ public class Parque implements IParque{
 		if (contadoresPersonasPuerta.get(puerta) == null){
 			contadoresPersonasPuerta.put(puerta, 0);
 		}		
+		
+		// Comprobación para entrar
 		comprobarAntesDeEntrar();
 		
 		// Aumentamos el contador total y el individual
@@ -40,6 +42,8 @@ public class Parque implements IParque{
 		if (contadoresPersonasPuerta.get(puerta) == null){
 			contadoresPersonasPuerta.put(puerta, 0);
 		}		
+		
+		// Comprobación para salir
 		comprobarAntesDeSalir();
 
 		// Aumentamos el contador total y el individual
