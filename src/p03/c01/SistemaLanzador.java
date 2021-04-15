@@ -4,7 +4,7 @@ public class SistemaLanzador {
 	public static void main(String[] args) {
 		
 		IParque parque = new Parque();
-		char letra_puerta = 'A';
+		char letra_puerta = 'A'; 
 		
 		System.out.println("¡Parque abierto!");
 		

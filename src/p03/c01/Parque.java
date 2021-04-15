@@ -4,6 +4,8 @@ import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Iterator;
 
+import com.sun.swing.internal.plaf.synth.resources.synth;
+
 public class Parque implements IParque{
 
 
@@ -18,12 +20,12 @@ public class Parque implements IParque{
 
 
 	@Override
-	public void entrarAlParque(String puerta){
-		
+	public synchronized void entrarAlParque(String puerta){
 		// Si no hay entradas por esa puerta, inicializamos
 		if (contadoresPersonasPuerta.get(puerta) == null){
 			contadoresPersonasPuerta.put(puerta, 0);
 		}		
+		comprobarAntesDeEntrar();
 		
 		// Aumentamos el contador total y el individual
 		contadorPersonasTotales++;		
@@ -33,15 +35,16 @@ public class Parque implements IParque{
 		imprimirInfo(puerta, "Entrada");
 		
 		checkInvariante();
-		
+		this.notifyAll();
 	}
 	
-	public void salirDelParque(String puerta) {
+	public synchronized void salirDelParque(String puerta) {
 		// Si no hay entradas por esa puerta, inicializamos
 		if (contadoresPersonasPuerta.get(puerta) == null){
 			contadoresPersonasPuerta.put(puerta, 0);
 		}		
-		
+		comprobarAntesDeSalir();
+
 		// Aumentamos el contador total y el individual
 		contadorPersonasTotales--;		
 		contadoresPersonasPuerta.put(puerta, contadoresPersonasPuerta.get(puerta)-1);
@@ -49,7 +52,8 @@ public class Parque implements IParque{
 		// Imprimimos el estado del parque
 		imprimirInfo(puerta, "Salida");
 		
-		checkInvariante();		
+		checkInvariante();	
+		this.notifyAll();
 	}
 	
 	
@@ -75,20 +79,30 @@ public class Parque implements IParque{
 	
 	protected void checkInvariante() {
 		assert sumarContadoresPuerta() == contadorPersonasTotales : "INV: La suma de contadores de las puertas debe ser igual al valor del contador del parte";
-		// TODO 
-		// TODO
+		assert sumarContadoresPuerta() >= 0 : "El parque está vacía";
+		assert sumarContadoresPuerta() <= AFÓRO_MAX: "El parque está lleno";
 	}
 
 	protected void comprobarAntesDeEntrar(){	// TODO
-		//
-		// TODO
-		//
+		while (contadorPersonasTotales >= AFÓRO_MAX) {
+			try {
+				this.wait();
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+		}
 	}
 
 	protected void comprobarAntesDeSalir(){		// TODO
-		//
-		// TODO
-		//
+		while ( contadorPersonasTotales<=0) {
+			try {
+				this.wait();
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+		}
 	}
 
 
